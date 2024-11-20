@@ -1,8 +1,10 @@
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, SelectHTMLAttributes } from "react";
 import { FieldConfig } from "formik";
 
 type formikTextInputType = InputHTMLAttributes<HTMLInputElement> & FieldConfig;
-
+type formikSelectInputType = SelectHTMLAttributes<HTMLSelectElement> &
+  FieldConfig<any> &
+  InputInterface;
 export interface InputInterface extends formikTextInputType {
   label: string;
   name: string;
@@ -10,7 +12,7 @@ export interface InputInterface extends formikTextInputType {
   isRequired?: boolean;
 }
 
-export interface SelectInputInterface extends InputInterface {
+export interface SelectInputInterface extends formikSelectInputType {
   options?: { label: string; value: string | number }[];
 }
 

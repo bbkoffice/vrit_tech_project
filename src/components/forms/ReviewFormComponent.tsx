@@ -8,6 +8,7 @@ import {
   MyButton,
 } from "../myInputs";
 import { Form, Formik } from "formik";
+import { useMemo } from "react";
 
 interface propsInterface {
   inputFields: CreateFormInterface[];
@@ -61,8 +62,26 @@ function ReviewFormComponent({ inputFields }: propsInterface) {
     }
   };
 
+  const initialValue = useMemo(() => {
+    let values = {};
+    inputFields?.forEach((e) => {
+      if (e?.name) {
+        values[e.name] = "";
+      }
+    });
+    return values;
+  }, [inputFields]);
   return (
-    <Formik initialValues={{}} onSubmit={() => {}}>
+    <Formik
+      enableReinitialize
+      initialValues={initialValue}
+      onSubmit={(values) => {
+        alert(`${Object.keys(values).map((e) => {
+          return `${e}: ${values?.[e]}\n`;
+        })}
+       `);
+      }}
+    >
       <Form className={"flex flex-col gap-5"}>
         <b>Your Form</b>
         <div className={"flex flex-col gap-2 "}>

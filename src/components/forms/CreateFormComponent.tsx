@@ -15,8 +15,9 @@ interface propsInterface {
   onSubmitCallbackHandler(payload: CreateFormInterface);
 }
 function CreateFormComponent({ onSubmitCallbackHandler }: propsInterface) {
-  const onSubmitHandler = (values: any) => {
+  const onSubmitHandler = (values: any, props) => {
     onSubmitCallbackHandler(values);
+    props?.resetForm(FormikValues.initialValues({}));
   };
 
   return (
@@ -25,7 +26,7 @@ function CreateFormComponent({ onSubmitCallbackHandler }: propsInterface) {
       onSubmit={onSubmitHandler}
       validationSchema={FormikValues.validationSchema}
     >
-      {({ values, setFieldValue }) => {
+      {({ values }) => {
         return (
           <Form className={"flex flex-col gap-2 p-4 border rounded-md"}>
             <div className={"font-medium"}>Add new field in input</div>
@@ -97,14 +98,6 @@ function CreateFormComponent({ onSubmitCallbackHandler }: propsInterface) {
                           <IoIosAdd />
                           <span>Add Options</span>
                         </div>
-                        {/*<MyButton*/}
-                        {/*  type={"button"}*/}
-                        {/*  onClick={() => {*/}
-                        {/*    push({ label: "", value: "" });*/}
-                        {/*  }}*/}
-                        {/*  name={"Add Options"}*/}
-                        {/*  style={"text-left text-[14px] p-1 text-green-500"}*/}
-                        {/*/>*/}
                       </div>
                     );
                   }}
@@ -131,10 +124,10 @@ const FormikValues = {
   initialValues: (values: Partial<CreateFormInterface>) => ({
     label: values?.label || "",
     name: values?.name || "",
-    type: FormFieldTypeEnum,
+    type: FormFieldTypeEnum.TEXT,
     options: values?.options || [],
     isRequired: values?.isRequired || false,
-    validationMessage: values?.validationMessage || false,
+    validationMessage: values?.validationMessage || "",
   }),
   validationSchema: yup.object().shape({
     label: yup.string().required("Label is required"),

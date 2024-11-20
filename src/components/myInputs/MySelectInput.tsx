@@ -13,7 +13,9 @@ function MySelectInput({ label, ...props }: SelectInputInterface) {
         {props?.isRequired && <span>*</span>}
       </label>
       <select
-        onChange={(e) => helpers?.setValue(e?.target?.value)}
+        onChange={async (e) => {
+          await helpers?.setValue(e?.target?.value);
+        }}
         className={`px-2 border outline-none min-h-[35px] rounded-md focus:border-[#2680EB] text-[16px] `}
         name={props?.name}
         {...props}

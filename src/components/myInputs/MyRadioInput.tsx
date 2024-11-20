@@ -12,8 +12,14 @@ function MyRadioInput({ label, ...props }: SelectInputInterface) {
       <div>
         {props?.options?.map((e, key) => {
           return (
-            <div>
-              <input type={"radio"} />
+            <div className={"flex items-center gap-2"}>
+              <input
+                type={"radio"}
+                onChange={(e) => {
+                  helpers.setValue(e?.target?.value);
+                }}
+                {...props}
+              />
               <label>{e?.label}</label>
             </div>
           );

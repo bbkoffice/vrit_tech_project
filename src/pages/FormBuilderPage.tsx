@@ -1,11 +1,60 @@
-import { CreateFormComponent, ReviewFormComponent } from "../components";
+import {
+  CreateFormComponent,
+  FormValueListComponent,
+  ReviewFormComponent,
+} from "../components";
 import { CreateFormInterface, FormFieldTypeEnum } from "../interfaces";
 
 import { useMemo, useState } from "react";
-import { MdDeleteOutline } from "react-icons/md";
 
 function FormBuilderPage() {
-  const [fields, setFields] = useState<CreateFormInterface[]>([]);
+  const [fields, setFields] = useState<CreateFormInterface[]>([
+    {
+      name: "name",
+      type: FormFieldTypeEnum.TEXT,
+      isRequired: false,
+      label: "Full Name",
+      placeholder: "Enter your name",
+      options: [],
+      validationMessage: "",
+    },
+    {
+      name: "gender",
+      type: FormFieldTypeEnum.SELECT,
+      isRequired: false,
+      label: "Gender",
+      placeholder: "Enter your gender",
+      options: [
+        {
+          label: "Male",
+          value: "male",
+        },
+        {
+          label: "Female",
+          value: "female",
+        },
+      ],
+      validationMessage: "",
+    },
+    {
+      name: "fav",
+      type: FormFieldTypeEnum.RADIO,
+      isRequired: false,
+      label: "Fav",
+      placeholder: "Enter your fav",
+      options: [
+        {
+          label: "Food",
+          value: "food",
+        },
+        {
+          label: "Chicken",
+          value: "chicken",
+        },
+      ],
+      validationMessage: "",
+    },
+  ]);
 
   const onCreateNewForm = (payload: CreateFormInterface) => {
     setFields((e) => {
@@ -30,23 +79,10 @@ function FormBuilderPage() {
           <span className={"font-bold"}>Input Fields</span>
           <div className={"flex flex-col gap-1"}>
             {inputFields?.length > 0 ? (
-              fields?.map((e, key) => {
-                return (
-                  <div
-                    className={
-                      "bg-gray-50 p-2 rounded-md cursor-pointer flex items-center justify-between"
-                    }
-                    key={key}
-                  >
-                    <div className={"flex flex-col text-[12px]"}>
-                      <span>Label: {e?.label}</span>
-                      <span>Type: {e?.type?.toUpperCase()}</span>
-                      <span>Required: {e?.isRequired ? "Yes" : "No"}</span>
-                    </div>
-                    <MdDeleteOutline onClick={() => onDeleteHandler(key)} />
-                  </div>
-                );
-              })
+              <FormValueListComponent
+                forms={inputFields}
+                onDeleteHandler={onDeleteHandler}
+              />
             ) : (
               <span>No fields created</span>
             )}
