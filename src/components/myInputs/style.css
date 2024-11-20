@@ -1,0 +1,11 @@
+.input_container {
+    @apply flex flex-col gap-1 text-left ;
+}
+
+.input_label {
+    @apply flex items-center text-[16px] text-[#00040E];
+}
+
+.input_textError {
+    @apply tracking-normal text-[14px] text-red-500;
+}
