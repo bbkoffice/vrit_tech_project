@@ -8,53 +8,7 @@ import { CreateFormInterface, FormFieldTypeEnum } from "../interfaces";
 import { useMemo, useState } from "react";
 
 function FormBuilderPage() {
-  const [fields, setFields] = useState<CreateFormInterface[]>([
-    {
-      name: "name",
-      type: FormFieldTypeEnum.TEXT,
-      isRequired: false,
-      label: "Full Name",
-      placeholder: "Enter your name",
-      options: [],
-      validationMessage: "",
-    },
-    {
-      name: "gender",
-      type: FormFieldTypeEnum.SELECT,
-      isRequired: false,
-      label: "Gender",
-      placeholder: "Enter your gender",
-      options: [
-        {
-          label: "Male",
-          value: "male",
-        },
-        {
-          label: "Female",
-          value: "female",
-        },
-      ],
-      validationMessage: "",
-    },
-    {
-      name: "fav",
-      type: FormFieldTypeEnum.RADIO,
-      isRequired: false,
-      label: "Fav",
-      placeholder: "Enter your fav",
-      options: [
-        {
-          label: "Food",
-          value: "food",
-        },
-        {
-          label: "Chicken",
-          value: "chicken",
-        },
-      ],
-      validationMessage: "",
-    },
-  ]);
+  const [fields, setFields] = useState<CreateFormInterface[]>([]);
 
   const onCreateNewForm = (payload: CreateFormInterface) => {
     setFields((e) => {

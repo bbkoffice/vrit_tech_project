@@ -7,6 +7,9 @@
 Welcome to the **Vrit Tech Project**! This document outlines the project setup, technology stack, known limitations, and time tracking.
 
 ---
+# Live demo link
+https://vrit-tech-project.vercel.app/
+
 
 ### **Setup Instructions**
 
@@ -48,4 +51,3 @@ Testing:
 - Facing issue in react-beautiful-dnd package.
 
 
-# Live demo link
